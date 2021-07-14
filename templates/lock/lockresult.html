@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+ 
+    </style>
+<body>
+     <h2>每日超过50吨的性能封锁原因汇总</h2> 
+
+    <hr>
+    <a href="/">返回主页</a>
+    <hr>
+    <a href="{{ url_for('lock.download_lock') }}">超50吨性能封锁清单下载</a>
+    <hr>
+    {% if rs %}
+        <table border="1" style="font-size:14px;" cellspacing="0" width="100%">
+            <tr>
+                <th>序号</th>
+                <th>封锁日期</th>
+                <th>产品大类</th>
+                <th>牌号</th>
+                <th>封锁重量</th>
+                <th>产品工程师</th>
+                <th>封锁原因</th>
+                <th>改进措施</th>
+                <th>原因措施更新</th>
+                
+            </tr>
+            {% for rowxy in rs %}
+                <tr>
+                    <th>{{ loop.index }}</th>
+                    <th>{{ rowxy.lockdate }}</th>
+                    <th>{{ rowxy.pty }}</th>
+                    <th>{{ rowxy.sg_sign }}</th>
+                    <th>{{ '%0.2f' % rowxy.lockwei|float }}</th>
+                    <th>{{ rowxy.engineer }}</th>
+                    <th>{{ rowxy.lockcause }}</th>
+                    <th>{{ rowxy.measures }}</th>
+                    <th><a href="{{ url_for('lock.update') }}?id={{ rowxy.id }}">更新</a> 
+                </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p style="color: red; font-size: 20px;">当前还没有任何50吨的封闭！</p>  
+    {% endif %}  
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    
+     
+    </style>
+<body>
+     <h3>性能封闭原因更新</h3> 
+    <hr>
+    <form action="{{ url_for('lock.update') }}" method="post">
+        <input type="hidden" name="id" value="{{ lr1.id }}">
+        <p>封闭原因：<input type="text" style="width:900px;height:30px" name="lockcause" value="{{ lr1.lockcause }}"></p>
+        <p>改进措施：<input type="text" style="width:900px;height:30px" name="measures" value="{{ lr1.measures }}"></p>
+        <p><input type="submit" value="更新"></p>
+    <hr>
+    <h3>性能封闭清单展示</h3> 
+    <hr>
+    {% if rs %}
+        <table border="1" style="font-size:16px;" cellspacing="0" width="95%">
+            <tr>
+                <th>序号</th>
+                <th>卷号</th>
+                <th>分包号</th>
+                <th>分包重量</th>
+                <th>牌号</th>
+                <th>PSR</th>
+                <th>出钢记号</th>
+                <th>合同号</th>
+                <th>厚度</th>
+                <th>宽度</th>
+                <th>PONO</th>
+                <th>封闭代码1</th>
+                <th>封闭代码2</th>
+                <th>封闭时间</th>
+                <th>判定时间</th>
+                <th>是否待处理</th>
+            </tr>
+            {% for rowxy in rs %}
+                <tr>
+                    <th>{{ loop.index }}</th>
+                    <th>{{ rowxy.matno }}</th>
+                    <th>{{ rowxy.divno }}</th>
+                    <th>{{ '%0.2f' % rowxy.divweight|float }}</th>
+                    <th>{{ rowxy.sign }}</th>
+                    <th>{{ rowxy.oldpsr }}</th>
+                    <th>{{ rowxy.steel }}</th>
+                    <th>{{ rowxy.orderno }}</th>
+                    <th>{{ '%0.2f' % rowxy.matordthick|float }}</th>
+                    <th>{{ rowxy.matordwidth }}</th>
+                    <th>{{ rowxy.pono }}</th>
+                    <th>{{ rowxy.coldjudgecode1 }}</th>
+                    <th>{{ rowxy.coldjudgecode2 }}</th>
+                    <th>{{ rowxy.lockdate }}</th>
+                    <th>{{ rowxy.judgedate }}</th>
+                    <th>{{ rowxy.flg }}</th>
+                </tr>
+            {% endfor %}
+        </table>
+    {%endif%}
+</body>
+
+</html>

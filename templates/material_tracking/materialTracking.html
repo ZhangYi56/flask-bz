@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>查询物料树履历(基于SASPUB，最晚可以查询前一天22点之前卷的履历)，可以用通配符模糊查询，_代表一位数字，%代表多个数，模糊查询不要太宽泛，会导致查询速度变慢，最多查询30卷不同材料跟踪号的数据</p> 
+    <hr>
+    <a href="/">返回主页</a>
+    <hr>
+    <form method="post">
+        {{ coil_Form.csrf_token() }}
+        {{ coil_Form.coil.label }} {{ coil_Form.coil }}
+        {{ coil_Form.submit }}<br>
+        {# 显示消息闪现的内容 #}
+        {% for message in get_flashed_messages() %}
+            {{ message }}
+        {% endfor %}
+    </form>
+
+    <hr>
+    {% for table in tables %}
+        {{ table|safe }}
+    {% endfor %}
+    <hr>
+</body>
+</html>

@@ -1,0 +1,3 @@
+sqlacodegen --schema steelplate  --tables lock_result --outfile lock_sqlacodegen.py 'ibm_db_sa://user:useruser123@DESKTOP-L18GBPP:50000/BZDESIGN'
+sqlacodegen --schema steelplate  --tables mech_lock_records --outfile MECH_sqlacodegen.py 'ibm_db_sa://user:useruser123@DESKTOP-L18GBPP:50000/BZDESIGN'
+mech_lock_records
